@@ -1,0 +1,24 @@
+{% extends "base_generic.html" %}
+{% block content %}
+  {% load i18n %}
+  <h1>{% trans "Author:" %} {{ author.first_name }} {{ author.last_name }}</h1>
+  <!-- author detail link not yet defined -->
+  <p>
+    <strong>{% trans "Birthday:" %}</strong> {{ author.date_of_birth }}
+  </p>
+  <div>
+    <h4>Book</h4>
+    {% for book in books %}
+      <hr />
+      <div>{{ book.title }}</div>
+    {% endfor %}
+  </div>
+  <div class="d-flex gap-1">
+    {% if perms.catalog.change_author %}
+      <a class="blue" href="{% url 'author-update' author.id %}">{% trans "Update" %}</a>
+    {% endif %}
+    {% if perms.catalog.delete_author %}
+      <a class="red" href="{% url 'author-delete' author.id %}">{% trans "Deletesss" %}</a>
+    {% endif %}
+  </div>
+{% endblock %}
