@@ -1,0 +1,51 @@
+[
+  {
+    "model": "catalog.Genre",
+    "pk": 1,
+    "fields": {
+      "name": "Kinh dị"
+    }
+  },
+  {
+    "model": "catalog.Genre",
+    "pk": 2,
+    "fields": {
+      "name": "Manga"
+    }
+  },
+  {
+    "model": "catalog.Author",
+    "pk": 1,
+    "fields": {
+      "first_name": "Nguyễn Nhật",
+      "last_name": "Ánh",
+      "date_of_birth": "1952-03-11"
+    }
+  },
+  {
+    "model": "catalog.Book",
+    "pk": 1,
+    "fields": {
+      "title": "Kính vạn hoa",
+      "author": 1,
+      "summary": "Kính vạn hoa",
+      "isbn": "9786042262521",
+      "genre": [1, 2]
+    }
+  },
+  {
+    "model": "auth.User",
+    "pk": 1,
+    "fields": {
+      "password": "pbkdf2_sha256$216000$VR2sXzL35VRR$JOzYH61MwV3jtHz4Z3Fwsn7g7dYCVS6ZufrL7U7m7Jk=",
+      "is_superuser": 1,
+      "username": "admin",
+      "first_name": "Sun",
+      "last_name": "*",
+      "email": "admin@gmail.com",
+      "is_staff": 1,
+      "is_active": 1,
+      "date_joined": "2023-07-05 01:48:07.621167"
+    }
+  }
+]
