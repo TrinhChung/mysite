@@ -1,0 +1,51 @@
+version: "3"
+volumes:
+  static_volume:
+services:
+  my-mysql:
+    container_name: mysql
+    image: mysql:8.0
+    hostname: mysql
+    environment:
+      - MYSQL_DATABASE=mysite
+      - MYSQL_USER=siteuser
+      - MYSQL_PASSWORD=chungtrinh1904
+      - MYSQL_ROOT_PASSWORD=chungtrinh1904
+    volumes:
+      - /tmp/app/mysqld:/run/mysqld
+      - ./db:/var/lib/mysql
+    restart: always
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
+    ports:
+      - 3306:3306
+    command: --default-authentication-plugin=mysql_native_password
+  my-django:
+    container_name: django
+    image: django-docker:0.0.1
+    build: .
+    # command: sh -c "python manage.py makemigrations &&
+    #   python manage.py migrate && python manage.py loaddata seeder.json && python manage.py collectstatic --no-input --clear && gunicorn locallibrary.wsgi runserver --bind 0.0.0.0:8000"
+    expose:
+      - 8000
+    restart: always
+    volumes:
+      - /tmp/app/mysqld:/var/run/mysqld
+      - .:/app
+      - static_volume:/app/staticfiles
+    depends_on:
+      my-mysql:
+        condition: service_healthy
+
+  my-nginx:
+    container_name: nginx
+    build: ./nginx
+    volumes:
+      - static_volume:/app/staticfiles
+    ports:
+      - 80:80
+    restart: always
+    depends_on:
+      - my-django

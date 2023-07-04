@@ -1,0 +1,91 @@
+version: 2.1
+orbs:
+  python: circleci/python@1.5.0
+  docker: circleci/docker@2.2.0
+
+jobs:
+  django-test:
+    machine:
+      image: ubuntu-2004:current
+    steps:
+      - checkout
+      - run:
+          name: Install Docker Compose
+          environment:
+            COMPOSE_VERSION: "2.15.1"
+          command: |
+            sudo apt update
+            sudo apt install apt-transport-https ca-certificates curl software-properties-common
+            curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+            sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
+            apt-cache policy docker-ce
+            sudo apt install docker-ce docker-compose-plugin
+            sudo usermod -aG docker ${USER}
+      - run:
+          name: Start container and verify it's working
+          command: |
+            docker-compose up -d
+      - run: |
+          docker ps
+          docker network ls
+      - run:
+          name: wait container mysql
+          command: |
+            echo "Waiting for MYSQL"
+            while ! nc -vz localhost 3306
+            do
+              sleep 1
+              echo "."
+            done
+            echo "connect success"
+      - run:
+          name: "migrate and seed"
+          command: |
+            docker-compose run my-django ./manage.py makemigrations
+            docker-compose run my-django ./manage.py migrate
+            docker-compose run my-django ./manage.py loaddata seeder.json
+      - run:
+          name: "create static file"
+          command: |
+            docker-compose run my-django ./manage.py collectstatic --no-input --clear
+      - run:
+          name: "create static file"
+          command: |
+            docker-compose run my-django ./manage.py test
+      - run:
+          name: docker-compose down
+          command: docker-compose down
+
+  build-and-push:
+    environment:
+      DOCKER_IMAGE: trinhchung/cicd
+      DOCKER_TAG: 0.0.1
+    executor: docker/docker
+    steps:
+      - setup_remote_docker
+      - checkout
+      - docker/check:
+          docker-username: DOCKER_USER
+          docker-password: DOCKER_PASSWORD
+      - docker/build:
+          image: $DOCKER_IMAGE
+          tag: $DOCKER_TAG
+      - docker/push:
+          digest-path: /tmp/digest.txt
+          image: $DOCKER_IMAGE
+          tag: $DOCKER_TAG
+
+      - run:
+          command: |
+            echo "Digest is: $(</tmp/digest.txt)"
+workflows:
+  build-deploy:
+    jobs:
+      - django-test
+      # - build-and-push:
+      #     requires:
+      #       - django-test
+      #     filters:
+      #       branches:
+      #         only:
+      #           - circleci-project-setup
