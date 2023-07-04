@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/3.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
+import os
 from django.utils.translation import gettext_lazy as _
 from pathlib import Path
 
@@ -40,6 +41,7 @@ INSTALLED_APPS = [
     "catalog.apps.CatalogConfig",
     "bootstrap5",
     "jquery",
+    "debug_toolbar",
 ]
 
 MIDDLEWARE = [
@@ -51,6 +53,7 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "django.middleware.locale.LocaleMiddleware",
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
 ]
 
 ROOT_URLCONF = "locallibrary.urls"
@@ -58,7 +61,9 @@ ROOT_URLCONF = "locallibrary.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],  # chi dinh vi tri cu the de django tim kiem templates
+        "DIRS": [
+            os.path.join(BASE_DIR, "templates")
+        ],  # chi dinh vi tri cu the de django tim kiem templates
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -136,4 +141,10 @@ STATIC_URL = "/static/"
 STATIC_ROOT = "/static/"
 STATICFILES_DIRS = [
     BASE_DIR / "static",
+]
+
+INTERNAL_IPS = [
+    # ...
+    "127.0.0.1",
+    # ...
 ]
