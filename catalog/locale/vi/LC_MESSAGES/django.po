@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-11 13:23+0700\n"
+"POT-Creation-Date: 2023-07-12 17:19+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -26,7 +26,7 @@ msgstr "Ngày không hợp lệ - gia hạn trong quá khứ"
 msgid "Invalid date - renewal more than 4 weeks ahead"
 msgstr "Ngày không hợp lệ - gia hạn trước hơn 4 tuần"
 
-#: forms.py:28
+#: forms.py:27
 msgid "Renewal date"
 msgstr "Ngày gia hạn"
 
@@ -47,6 +47,48 @@ msgstr "Bạn có chắc chắn muốn xóa tác giả:"
 #: templates/catalog/author_confirm_delete.html:8
 msgid "Yes, delete."
 msgstr "Vâng, xóa."
+
+#: templates/base_generic.html:46
+msgid "Staff"
+msgstr "Nhân viên"
+
+#: templates/base_generic.html:48
+msgid "Manage Book Instance"
+msgstr "Quản lý sách"
+
+#: templates/base_generic.html:53
+msgid "Name"
+msgstr "Tên"
+
+#: templates/base_generic.html:55
+msgid "My Borrowed"
+msgstr "Đã mượn"
+
+#: templates/base_generic.html:58
+msgid "Logout"
+msgstr "Đăng xuất"
+
+#: templates/base_generic.html:62
+msgid "Login"
+msgstr "Đăng nhập"
+
+#: forms.py:29
+msgid "Enter a date between now and 4 weeks (default 3)."
+msgstr ""
+
+#: templates/catalog/author_confirm_delete.html:4
+#, fuzzy
+#| msgid "All authors"
+msgid "Delete Author"
+msgstr "Tác giả:"
+
+#: templates/catalog/author_confirm_delete.html:5
+msgid "Are you sure you want to delete the author:"
+msgstr ""
+
+#: templates/catalog/author_confirm_delete.html:8
+msgid "Yes, delete."
+msgstr ""
 
 #: templates/catalog/author_detail.html:4 templates/catalog/book_detail.html:6
 #, fuzzy
@@ -240,21 +282,70 @@ msgstr "Đăng nhập"
 msgid "previous"
 msgstr "Quay lại"
 
-#: templates/pagination.html:10
-msgid "Page"
-msgstr "Trang"
+#: templates/navbar.html:15
+#, fuzzy
+#| msgid "Books:"
+msgid "Book"
+msgstr "Sách:"
 
-#: templates/pagination.html:10
-msgid "of"
-msgstr "trên"
+#: templates/navbar.html:18
+#, fuzzy
+#| msgid "All authors"
+msgid "Author"
+msgstr "Tác giả:"
 
-#: views.py:64
+#: templates/navbar.html:21
+msgid "Manage"
+msgstr "Quản lý"
+
+#: templates/navbar.html:25
+msgid "Manage Book Instance"
+msgstr "Quản lý sách"
+
+#: templates/navbar.html:30
+msgid "Create Author"
+msgstr "Tạo tác giả"
+
+#: templates/navbar.html:40
+msgid "Name"
+msgstr "Tên"
+
+#: templates/navbar.html:43
+msgid "My Borrowed"
+msgstr "Đã mượn"
+
+#: templates/navbar.html:46
+msgid "Change password"
+msgstr ""
+
+#: templates/navbar.html:49
+msgid "Reset password"
+msgstr ""
+
+#: templates/navbar.html:52
+msgid "Logout"
+msgstr "Đăng xuất"
+
+#: templates/navbar.html:58
+msgid "Login"
+msgstr "Đăng nhập"
+
+#: views.py:63
 msgid "Book does not exist"
 msgstr "Sách không tồn tại"
 
-#: views.py:100
+#: views.py:99
 msgid "Author does not exist"
 msgstr "Tác giả không tồn tại"
+
+#~ msgid "previous"
+#~ msgstr "Quay lại"
+
+#~ msgid "Page"
+#~ msgstr "Trang"
+
+#~ msgid "of"
+#~ msgstr "trên"
 
 #~ msgid "All books"
 #~ msgstr "Sách"

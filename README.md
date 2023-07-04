@@ -31,3 +31,12 @@ tao i18n
 - wrap text
 - django-admin makemessages -l {short name language}
 - django-admin compilemessages
+
+############################
+Run test
+python3 manage.py test
+python3 manage.py test --verbosity 2 // chi tiet voi 0 1 2 3
+python3 manage.py collectstatic// chay khi gap loi ValueError: Missing staticfiles manifest entry...
+python3 manage.py test --parallel auto // chay test song song
+python3 manage.py test catalog.tests.test_models // test module
+python3 manage.py test catalog.tests.test_models.YourTestClass.test_one_plus_one_equals_two

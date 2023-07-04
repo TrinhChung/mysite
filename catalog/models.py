@@ -3,6 +3,7 @@ from django.urls import reverse
 from django.contrib.auth.models import User
 import uuid
 from datetime import date
+from catalog.constant import LOAN_STATUS
 
 
 class Genre(models.Model):
@@ -54,19 +55,12 @@ class BookInstance(models.Model):
     id = models.UUIDField(
         primary_key=True,
         default=uuid.uuid4,
-        help_text="Unique ID for this particular bookacross whole library",
+        help_text="Unique ID for this particular book across whole library",
     )
-    book = models.ForeignKey("Book", on_delete=models.RESTRICT)
+    book = models.ForeignKey("Book", on_delete=models.CASCADE)
     imprint = models.CharField(max_length=200)
     due_back = models.DateField(null=True, blank=True)
     borrower = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
-
-    LOAN_STATUS = (
-        ("m", "Maintenance"),
-        ("o", "On loan"),
-        ("a", "Available"),
-        ("r", "Reserved"),
-    )
     status = models.CharField(
         max_length=1,
         choices=LOAN_STATUS,
@@ -87,9 +81,9 @@ class BookInstance(models.Model):
             ("can_mark_returned", "Can mark returned book"),
         )
 
-        def __str__(self):
-            """String for representing the Model object."""
-            return f"{self.id} ({self.book.title})"
+    def __str__(self):
+        """String for representing the Model object."""
+        return f"{self.id} ({self.book.title})"
 
 
 class Author(models.Model):

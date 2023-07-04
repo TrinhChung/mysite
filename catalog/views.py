@@ -7,10 +7,9 @@ from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.mixins import PermissionRequiredMixin, LoginRequiredMixin
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect
-from django.urls import reverse
 from catalog.forms import RenewBookModelForm
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 
 # Create your views here.
 
@@ -40,7 +39,7 @@ def index(request):
 class BookListView(generic.ListView):
     model = Book
     # your own name for the list as a template variable
-    paginate_by = 2
+    paginate_by = 10
 
     def get_queryset(self):
         return Book.objects.all()
@@ -74,7 +73,7 @@ class BookDetailView(generic.DetailView):
 class AuthorListView(generic.ListView):
     model = Author
     # your own name for the list as a template variable
-    paginate_by = 2
+    paginate_by = 10
 
     def get_queryset(self):
         return Author.objects.all()
@@ -172,7 +171,7 @@ def renew_book_librarian(request, pk):
 
 class AuthorCreate(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     model = Author
-    permission_required = "catalog.create_author"
+    permission_required = "catalog.add_author"
     fields = ["first_name", "last_name", "date_of_birth", "date_of_death"]
     initial = {"date_of_death": "11/06/2020"}
 
@@ -181,9 +180,7 @@ class AuthorUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     model = Author
     permission_required = "catalog.change_author"
 
-    fields = (
-        "__all__"  # Not recommended (potential security issue if more fields added)
-    )
+    fields = "__all__"
 
 
 class AuthorDelete(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
