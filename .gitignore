@@ -2,3 +2,4 @@
 /my.cnf
 /db.sqlite3
 .vscode/
+**/locale/**/*.mo
