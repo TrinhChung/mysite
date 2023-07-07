@@ -1,4 +1,3 @@
 **/__pycache__/
 /my.cnf
-#igonore db tranh conflict khi merge cac nhanh
-/db.sqlite3 
+/db.sqlite3
