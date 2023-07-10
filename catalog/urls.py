@@ -1,3 +1,7 @@
-from django.urls import path
+from django.urls import include, path
 from . import views
-urlpatterns = []
+
+urlpatterns = [
+    path('', views.index, name='index'),
+    path('i18n/', include('django.conf.urls.i18n')),
+]
