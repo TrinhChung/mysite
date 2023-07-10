@@ -41,6 +41,27 @@
               <li>
                 <a href="{% url 'authors' %}">{% trans "All authors" %}</a>
               </li>
+              {% if perms.catalog.view_list_on_loan %}
+                <hr />
+                <li>{% trans "Staff" %}</li>
+                <li>
+                  <a href="{% url 'bookinst-manage' %}">{% trans "Manage Book Instance" %}</a>
+                </li>
+              {% endif %}
+              {% if user.is_authenticated %}
+                <hr />
+                <li>{% trans "Name" %}: {{ user.get_username }}</li>
+                <li>
+                  <a href="{% url 'my-borrowed' %}">{% trans "My Borrowed" %}</a>
+                </li>
+                <li>
+                  <a href="{% url 'logout' %}?next={{ request.path }}">{% trans "Logout" %}</a>
+                </li>
+              {% else %}
+                <li>
+                  <a href="{% url 'login' %}?next={{ request.path }}">{% trans "Login" %}</a>
+                </li>
+              {% endif %}
             </ul>
           {% endblock sidebar %}
         </div>

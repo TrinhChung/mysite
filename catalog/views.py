@@ -3,6 +3,9 @@ from django.http import Http404
 from django.shortcuts import render
 from catalog.models import Book, Author, BookInstance, Genre
 from django.views import generic
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import PermissionRequiredMixin
 
 # Create your views here.
 
@@ -95,3 +98,37 @@ class AuthorDetailView(generic.DetailView):
         context = super(AuthorDetailView, self).get_context_data(**kwargs)
         context["books"] = context["author"].book_set.all()
         return context
+
+
+class LoanedBooksByUserListView(LoginRequiredMixin, generic.ListView):
+    """Generic class-based view listing books on loan to current user."""
+
+    model = BookInstance
+    template_name = "catalog/bookinstance_list_borrowed_user.html"
+    paginate_by = 10
+
+    def get_queryset(self):
+        return (
+            BookInstance.objects.filter(borrower=self.request.user)
+            .filter(status__exact="o")
+            .order_by("due_back")
+        )
+
+
+class LoanedBooksManageListView(
+    LoginRequiredMixin, PermissionRequiredMixin, generic.ListView
+):
+    """Generic class-based view listing books on loan to current user."""
+
+    model = BookInstance
+    permission_required = "catalog.view_list_on_loan"
+    template_name = "catalog/bookinstance_manage.html"
+    paginate_by = 10
+
+    def get_queryset(self):
+        return (
+            BookInstance.objects.all()
+            .filter(status__exact="o")
+            .order_by("-due_back")
+            .select_related("borrower")
+        )
