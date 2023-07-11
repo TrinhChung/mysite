@@ -82,7 +82,10 @@ class BookInstance(models.Model):
 
     class Meta:
         ordering = ["due_back"]
-        permissions = (("view_list_on_loan", "Get all book on loan"),)
+        permissions = (
+            ("view_list_on_loan", "Get all book on loan"),
+            ("can_mark_returned", "Can mark returned book"),
+        )
 
         def __str__(self):
             """String for representing the Model object."""

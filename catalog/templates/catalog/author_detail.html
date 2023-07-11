@@ -13,4 +13,12 @@
       <div>{{ book.title }}</div>
     {% endfor %}
   </div>
+  <div class="d-flex gap-1">
+    {% if perms.catalog.change_author %}
+      <a class="blue" href="{% url 'author-update' author.id %}">{% trans "Update" %}</a>
+    {% endif %}
+    {% if perms.catalog.delete_author %}
+      <a class="red" href="{% url 'author-delete' author.id %}">{% trans "Deletesss" %}</a>
+    {% endif %}
+  </div>
 {% endblock %}

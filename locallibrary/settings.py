@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     "bootstrap5",
     "jquery",
     "debug_toolbar",
+    "bootstrap_datepicker_plus",
 ]
 
 MIDDLEWARE = [
