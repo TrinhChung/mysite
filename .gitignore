@@ -3,3 +3,7 @@
 /db.sqlite3
 .vscode/
 **/locale/**/*.mo
+db/
+staticfiles/
+/.coverage
+/mysite.log

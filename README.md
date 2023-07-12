@@ -40,3 +40,7 @@ python3 manage.py collectstatic// chay khi gap loi ValueError: Missing staticfil
 python3 manage.py test --parallel auto // chay test song song
 python3 manage.py test catalog.tests.test_models // test module
 python3 manage.py test catalog.tests.test_models.YourTestClass.test_one_plus_one_equals_two
+
+############################
+Create file requirements
+pip3 freeze > requirements.txt

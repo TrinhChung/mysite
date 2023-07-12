@@ -1,9 +1,12 @@
 {% extends "base_generic.html" %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/styles.css' %}" />
 {% block title %}
   {% load i18n %}
   <title>{% trans "Home Library" %}</title>
 {% endblock title %}
 {% block content %}
+  {% include "carousel_banner.html" %}
   <h1>{% trans "Home Library" %}</h1>
   <p>
     {% trans "Welcome to LocalLibrary, a website developed by" %}
@@ -11,7 +14,7 @@
   </p>
   <h2>{% trans "Dynamic content" %}</h2>
   <p>{% trans "The library has the following record counts:" %}</p>
-  <ul>
+  <ul class="pl-40">
     <li>
       <strong>{% trans "Books:" %}</strong>
       {{ num_books }}
