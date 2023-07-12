@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-11 13:23+0700\n"
+"POT-Creation-Date: 2023-07-12 17:19+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -26,11 +26,11 @@ msgstr ""
 msgid "Invalid date - renewal more than 4 weeks ahead"
 msgstr ""
 
-#: forms.py:28
+#: forms.py:27
 msgid "Renewal date"
 msgstr ""
 
-#: forms.py:30
+#: forms.py:29
 msgid "Enter a date between now and 4 weeks (default 3)."
 msgstr ""
 
@@ -229,32 +229,37 @@ msgid "My Borrowed"
 msgstr "Đã mượn"
 
 #: templates/navbar.html:46
+msgid "Change password"
+msgstr ""
+
+#: templates/navbar.html:49
+msgid "Reset password"
+msgstr ""
+
+#: templates/navbar.html:52
 msgid "Logout"
 msgstr "Đăng xuất"
 
-#: templates/navbar.html:52
+#: templates/navbar.html:58
 msgid "Login"
 msgstr "Đăng nhập"
 
-#: templates/pagination.html:8
-msgid "previous"
-msgstr "Quay lại"
-
-#: templates/pagination.html:10
-msgid "Page"
-msgstr "Trang"
-
-#: templates/pagination.html:10
-msgid "of"
-msgstr "trên"
-
-#: views.py:64
+#: views.py:63
 msgid "Book does not exist"
 msgstr "Sách không tồn tại"
 
-#: views.py:100
+#: views.py:99
 msgid "Author does not exist"
 msgstr "Tác giả không tồn tại"
+
+#~ msgid "previous"
+#~ msgstr "Quay lại"
+
+#~ msgid "Page"
+#~ msgstr "Trang"
+
+#~ msgid "of"
+#~ msgstr "trên"
 
 #~ msgid "All books"
 #~ msgstr "Sách"
