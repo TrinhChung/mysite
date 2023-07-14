@@ -7,13 +7,13 @@ jobs:
     docker:
       - image: cimg/python:3.10.1
       - image: cimg/mysql:8.0
+        command: --default-authentication-plugin=mysql_native_password
         environment:
           MYSQL_DATABASE: mysite
           MYSQL_HOST: localhost
           MYSQL_USER: siteuser
           MYSQL_PASSWORD: chungtrinh1904
           MYSQL_ROOT_PASSWORD: chungtrinh1904
-        command: --default-authentication-plugin=mysql_native_password
     steps:
       - checkout
       - run:
