@@ -16,16 +16,19 @@ import logging
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
+IS_PRODUCT = int(os.environ.get("PRODUCT", 0)) == 1
+HOST_MYSQL = "mysql" if IS_PRODUCT else "localhost"
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "cg#p$g+j9tax!#a3cup@1$8obt2_+&k3q+pmu)5%asj6yjpkag"
+SECRET_KEY = os.environ.get(
+    "SECRET_KEY", "cg#p$g+j9tax!#a3cup@1$8obt2_+&k3q+pmu)5%asj6yjpkag"
+)
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = not IS_PRODUCT
 
 LOGGING = {
     "version": 1,
@@ -122,14 +125,12 @@ WSGI_APPLICATION = "locallibrary.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.mysql",
-        "OPTIONS": {
-            "read_default_file": "./my.cnf",
-        },
+        "NAME": "mysite",
+        "USER": "root",
+        "PASSWORD": "chungtrinh1904",
+        "HOST": HOST_MYSQL,
+        "PORT": "3306",
     }
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.sqlite3',
-    #     'NAME': BASE_DIR / 'db.sqlite3',
-    # }
 }
 
 

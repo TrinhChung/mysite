@@ -10,6 +10,7 @@ services:
       python manage.py migrate && python manage.py loaddata seeder.json && python manage.py collectstatic --no-input --clear && gunicorn locallibrary.wsgi runserver --bind 0.0.0.0:8000"
     expose:
       - 8000
+    restart: always
     volumes:
       - /tmp/app/mysqld:/var/run/mysqld
       - .:/app
@@ -39,5 +40,6 @@ services:
       - static_volume:/app/staticfiles
     ports:
       - 80:80
+    restart: always
     depends_on:
       - my-django
