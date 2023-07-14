@@ -21,7 +21,7 @@ jobs:
           command: |
             sudo apt-get update
             sudo apt-get install mysql-client
-            mysql -u root -p \
+            mysql -u root -p
             ALTER USER 'root'@'localhost' IDENTIFIED BY 'chungtrinh1904'
       - run:
           name: install dependencies
