@@ -19,7 +19,8 @@ jobs:
       - run:
           name: reset pass word
           command: |
-            sudo apt-get install default-mysql-client
+            sudo apt-get update
+            sudo apt-get install mysql-client
             mysql -u root -e ALTER USER 'root'@'localhost' IDENTIFIED BY 'MyNewPass'
       - run:
           name: install dependencies
