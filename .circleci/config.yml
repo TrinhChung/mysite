@@ -5,26 +5,15 @@ orbs:
 jobs:
   django-test:
     docker:
-      - image: circleci/python:3.8.2
-        environment:
-          MYSQL_USER: root
-          MYSQL_PASSWORD: chungtrinh1904
-          MYSQL_HOST: localhost
-          MYSQL_PORT: 3306
-          MYSQL_DATABASE: mysite
-
+      - image: cimg/python:3.10.1
     steps:
       - checkout
       - run:
-          name: Install dependencies
-          command: |
-            sudo apt-get update && sudo apt-get install -y mysql-client
-
+          name: install dependencies
+          command: pip install -r requirements.txt
       - run:
-          name: Run tests
-          command: |
-            pip install -r requirements.txt
-            python manage.py test --noinput --keepdb
+          name: run tests
+          command: python manage.py test
 
   build-and-push:
     environment:
