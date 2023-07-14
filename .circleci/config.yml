@@ -7,7 +7,7 @@ jobs:
     docker:
       - image: cimg/python:3.10.1
       - image: cimg/mysql:8.0
-        command: --default-authentication-plugin=authentication_policy
+        command: MYSQL_ROOT_PASSWORD=chungtrinh1904
         environment:
           MYSQL_DATABASE: mysite
           MYSQL_HOST: localhost
