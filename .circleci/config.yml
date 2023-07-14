@@ -21,7 +21,7 @@ jobs:
           command: |
             sudo apt-get update
             sudo apt-get install mysql-client
-            mysql -u root -pchungtrinh1904
+            mysql -u root -p"chungtrinh1904"
             ALTER USER 'root'@'localhost' IDENTIFIED BY 'chungtrinh1904'
             FLUSH PRIVILEGES
       - run:
