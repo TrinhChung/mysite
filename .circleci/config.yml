@@ -17,6 +17,12 @@ jobs:
     steps:
       - checkout
       - run:
+          name: reset pass word
+          command: docker run --rm -d \
+            -e MYSQL_ROOT_PASSWORD=chungtrinh1904 \
+            -v /my/own/datadir:/var/lib/mysql \
+            mysql:tag --init-file /mysql-init.sql
+      - run:
           name: install dependencies
           command: pip install -r requirements.txt
       - run:
