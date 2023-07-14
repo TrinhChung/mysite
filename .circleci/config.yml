@@ -19,10 +19,8 @@ jobs:
       - run:
           name: reset pass word
           command: |
-            docker run --rm -d \
-            -e MYSQL_ROOT_PASSWORD=chungtrinh1904 \
-            -v /my/own/datadir:/var/lib/mysql \
-            mysql:8.0 --init-file /mysql-init.sql
+            sudo apt-get install default-mysql-client
+            mysql -u root -e ALTER USER 'root'@'localhost' IDENTIFIED BY 'MyNewPass'
       - run:
           name: install dependencies
           command: pip install -r requirements.txt
