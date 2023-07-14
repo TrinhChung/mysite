@@ -17,7 +17,7 @@ jobs:
       - run:
           name: create password setup_remote_docker
           command: |
-            sudo apt-get install default-mysql-client
+            sudo apt-get install mysql-client
             mysql -u root -p -e "ALTER USER 'root'@'localhost' IDENTIFIED BY 'newpwd'; FLUSH PRIVILEGES;"
       - run:
           name: install dependencies
