@@ -5,7 +5,7 @@ orbs:
 jobs:
   django-test:
     docker:
-      - image: circleci/python:3.10.6
+      - image: circleci/python:3.8.2
         environment:
           MYSQL_USER: root
           MYSQL_PASSWORD: chungtrinh1904
