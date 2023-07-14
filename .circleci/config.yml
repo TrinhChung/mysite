@@ -1,21 +1,17 @@
 version: 2.1
 orbs:
-  # The python orb contains a set of prepackaged CircleCI configuration you can use repeatedly in your configuration files
-  # Orb commands and jobs help you with common scripting around a language/tool
-  # so you dont have to copy and paste it everywhere.
-  # See the orb documentation here: https://circleci.com/developer/orbs/orb/circleci/python
   python: circleci/python@1.5.0
   docker: circleci/docker@2.2.0
 jobs:
   django-test:
     docker:
-      - image: circleci/python:3.8.2
+      - image: circleci/python:3.10.6
         environment:
-          MYSQL_USER: $MYSQL_USER
-          MYSQL_PASSWORD: $MYSQL_PASSWORD
-          MYSQL_HOST: $MYSQL_HOST
-          MYSQL_PORT: $MYSQL_PORT
-          MYSQL_DATABASE: $MYSQL_DATABASE
+          MYSQL_USER: root
+          MYSQL_PASSWORD: chungtrinh1904
+          MYSQL_HOST: localhost
+          MYSQL_PORT: 3306
+          MYSQL_DATABASE: mysite
 
     steps:
       - checkout
