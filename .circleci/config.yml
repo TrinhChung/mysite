@@ -6,6 +6,13 @@ jobs:
   django-test:
     docker:
       - image: cimg/python:3.10.1
+      - image: cimg/mysql:8.0
+        environment:
+          MYSQL_USER: root
+          MYSQL_PASSWORD: chungtrinh1904
+          MYSQL_HOST: localhost
+          MYSQL_PORT: 3306
+          MYSQL_DATABASE: mysite
     steps:
       - checkout
       - run:
@@ -13,7 +20,7 @@ jobs:
           command: pip install -r requirements.txt
       - run:
           name: run tests
-          command: python manage.py test
+          command: python manage.py test --noinput --keepdb
 
   build-and-push:
     environment:
