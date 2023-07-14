@@ -15,6 +15,8 @@ jobs:
     steps:
       - checkout
       - run:
+          command: "mysql -u root -pchungtrinh1904"
+      - run:
           name: install dependencies
           command: pip install -r requirements.txt
       - run:
