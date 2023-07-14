@@ -8,29 +8,27 @@ orbs:
   docker: circleci/docker@2.2.0
 jobs:
   django-test:
-    working_directory: ~/platform
     docker:
-      - image: circleci/python:3.8
+      - image: circleci/python:3.8.2
+        environment:
+          MYSQL_USER: $MYSQL_USER
+          MYSQL_PASSWORD: $MYSQL_PASSWORD
+          MYSQL_HOST: $MYSQL_HOST
+          MYSQL_PORT: $MYSQL_PORT
+          MYSQL_DATABASE: $MYSQL_DATABASE
+
     steps:
-      - checkout:
-          path: ~/platform
+      - checkout
       - run:
           name: Install dependencies
           command: |
-            ls -l
-            python3 -m venv venv
-            . venv/bin/activate
-            pip3 install -r requirements.txt
-      - run:
-          name: Run migrations
-          command: |
-            . venv/bin/activate
-            python manage.py migrate --skip-checks
+            sudo apt-get update && sudo apt-get install -y mysql-client
+
       - run:
           name: Run tests
           command: |
-            . venv/bin/activate
-            python manage.py test
+            pip install -r requirements.txt
+            python manage.py test --noinput --keepdb
 
   build-and-push:
     environment:
