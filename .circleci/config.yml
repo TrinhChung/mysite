@@ -22,7 +22,7 @@ jobs:
             docker run --rm -d \
             -e MYSQL_ROOT_PASSWORD=chungtrinh1904 \
             -v /my/own/datadir:/var/lib/mysql \
-            mysql:tag --init-file /mysql-init.sql
+            mysql:8.0 --init-file /mysql-init.sql
       - run:
           name: install dependencies
           command: pip install -r requirements.txt
