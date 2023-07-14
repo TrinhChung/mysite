@@ -15,7 +15,7 @@ jobs:
     steps:
       - checkout
       - run:
-          command: "mysql -u root -pchungtrinh1904"
+          command: docker exec -it cimg/mysql:8.0 /bin/bash -c "ls"
       - run:
           name: install dependencies
           command: pip install -r requirements.txt
