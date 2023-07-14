@@ -13,6 +13,7 @@ jobs:
           MYSQL_USER: siteuser
           MYSQL_PASSWORD: chungtrinh1904
           MYSQL_ROOT_PASSWORD: chungtrinh1904
+        command: MYSQL_ROOT_PASSWORD=chungtrinh1904 --default-authentication-plugin=mysql_native_password
     steps:
       - checkout
       - run:
