@@ -17,8 +17,7 @@ jobs:
       - run:
           name: create password setup_remote_docker
           command: |
-            mysql -u root -p SET PASSWORD FOR 'root'@'localhost' = PASSWORD('newpwd')
-            mysql -u root -p FLUSH PRIVILEGES
+            mysql -u root -p -e "ALTER USER 'root'@'localhost' IDENTIFIED BY 'newpwd'; FLUSH PRIVILEGES;"
       - run:
           name: install dependencies
           command: pip install -r requirements.txt
