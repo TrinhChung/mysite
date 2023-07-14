@@ -21,8 +21,9 @@ jobs:
           command: |
             sudo apt-get update
             sudo apt-get install mysql-client
-            mysql -u root -p
+            mysql -u root -pchungtrinh1904
             ALTER USER 'root'@'localhost' IDENTIFIED BY 'chungtrinh1904'
+            FLUSH PRIVILEGES
       - run:
           name: install dependencies
           command: pip install -r requirements.txt
