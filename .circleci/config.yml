@@ -17,6 +17,11 @@ jobs:
           MYSQL_ROOT_PASSWORD: chungtrinh1904
     steps:
       - checkout
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - run: |
+          docker ps
+          docker network ls
       - run:
           name: Waiting for MySQL to be ready
           command: |
