@@ -19,7 +19,7 @@ jobs:
       - checkout
       - run: |
           docker ps
-      - run: |
+      - run: sleep 5 && nc -vz localhost 3306
 
       # - run:
       #     name: install dependencies
