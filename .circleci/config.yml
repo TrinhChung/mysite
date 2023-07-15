@@ -9,6 +9,9 @@ jobs:
         name: python
       - image: cimg/mysql:8.0
         name: mysql
+        auth:
+          username: $DOCKER_USER
+          password: $DOCKER_PASSWORD
         command: --default-authentication-plugin=mysql_native_password
         environment:
           MYSQL_DATABASE: mysite
@@ -20,6 +23,9 @@ jobs:
       - checkout
       - setup_remote_docker:
           docker_layer_caching: true
+      - run:
+          name: Start container and verify it's working
+          command: docker-compose up --build
       - run: |
           docker ps
           docker network ls
