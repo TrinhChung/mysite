@@ -129,7 +129,7 @@ DATABASES = {
         "USER": "root",
         "PASSWORD": "chungtrinh1904",
         "HOST": HOST_MYSQL,
-        "PORT": "3306",
+        "PORT": 3306,
     }
 }
 
