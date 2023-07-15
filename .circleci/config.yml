@@ -10,6 +10,7 @@ jobs:
       - image: cimg/mysql:8.0
         name: mysql
         command: --default-authentication-plugin=mysql_native_password
+        entrypoint: ["docker-entrypoint.sh"]
         environment:
           MYSQL_DATABASE: mysite
           MYSQL_USER: siteuser
@@ -17,7 +18,7 @@ jobs:
           MYSQL_ROOT_PASSWORD: chungtrinh1904
     steps:
       - checkout
-      - run: sleep 5 && nc -vz localhost 3306
+      - run: nc -vz localhost 3306
 
       - run:
           name: install dependencies
