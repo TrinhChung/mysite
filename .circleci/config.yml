@@ -15,6 +15,7 @@ jobs:
           MYSQL_USER: siteuser
           MYSQL_PASSWORD: chungtrinh1904
           MYSQL_ROOT_PASSWORD: chungtrinh1904
+
     steps:
       - checkout
       - setup_remote_docker:
@@ -22,6 +23,13 @@ jobs:
       - run: |
           docker ps
           docker network ls
+      - run:
+          name: wait container mysql
+          command: |
+            until mysql -h"localhost" -P"3306" -u"$root" -p"$chungtrinh1904" -e '\q'; do
+              >&2 echo "MySQL is starting up ... will try again momentarily"
+              sleep 1
+            done
       - run:
           name: install dependencies
           command: pip install -r requirements.txt
