@@ -17,16 +17,14 @@ jobs:
           MYSQL_ROOT_PASSWORD: chungtrinh1904
     steps:
       - checkout
-      - run: |
-          docker ps
       - run: sleep 5 && nc -vz localhost 3306
 
-      # - run:
-      #     name: install dependencies
-      #     command: pip install -r requirements.txt
-      # - run:
-      #     name: run tests
-      #     command: python manage.py test --noinput --keepdb
+      - run:
+          name: install dependencies
+          command: pip install -r requirements.txt
+      - run:
+          name: run tests
+          command: python manage.py test --noinput --keepdb
 
   build-and-push:
     environment:
