@@ -39,13 +39,6 @@ jobs:
       - run:
           name: run tests
           command: |
-            ps -A|grep mysql
-            sudo pkill mysql
-            ps -A|grep mysqld
-            sudo pkill mysqld
-            sudo apt-get update 
-            sudo apt-get install mysql-client
-            service mysql start
             mysql -u root -p"chungtrinh1904"
             # python manage.py test 
             cat mysite.log
