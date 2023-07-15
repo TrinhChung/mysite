@@ -1,56 +1,54 @@
 version: 2
+orbs:
+  python: circleci/python@1.5.0
+  docker: circleci/docker@2.2.0
+
 jobs:
-  build:
-    docker:
-      - image: circleci/python:3.8.0
-      - image: circleci/mysql:8.0.4
-        environment:
-          MYSQL_ROOT_PASSWORD: chungtrinh1904
-          MYSQL_DATABASE: mysite
-          MYSQL_USER: siteuser
-          MYSQL_PASSWORD: chungtrinh1904
+  django-test:
+    machine:
+      image: circleci/classic:edge
     steps:
       - checkout
-      - run: sudo chown -R circleci:circleci /usr/local/bin
-      - run: sudo chown -R circleci:circleci /usr/local/lib/python3.8/site-packages
-      - restore_cache:
-          key: deps10-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
+      - run:
+          # テストに必要なコンテナを立ち上げ
+          name: docker-compose up
+          command: docker-compose up -d
+      - run:
+          # トラブルシューティング時、CircleCI の UI 上でコンテナの起動状況を確認できるようにコンテナ一覧を表示させる（趣味）
+          name: docker ps
+          command: docker ps
+      - run:
+          # Django の自動テスト
+          # ここで失敗すると次の処理には進まないようになっているため、問題があるコードは本番環境に反映されないようになっている
+          name: test
+          command: docker-compose run python ./manage.py test
+      - run:
+          # コンテナを停止 (今思えばいらないかも？)
+          name: docker-compose down
+          command: docker-compose down
+
+  build-and-push:
+    environment:
+      DOCKER_IMAGE: trinhchung/cicd
+      DOCKER_TAG: 0.0.1
+    executor: docker/docker
+    steps:
+      - setup_remote_docker
+      - checkout
+      - docker/check:
+          docker-username: DOCKER_USER
+          docker-password: DOCKER_PASSWORD
+      - docker/build:
+          image: $DOCKER_IMAGE
+          tag: $DOCKER_TAG
+      - docker/push:
+          digest-path: /tmp/digest.txt
+          image: $DOCKER_IMAGE
+          tag: $DOCKER_TAG
+
       - run:
           command: |
-            sudo pip install pipenv
-            pipenv install
-      - save_cache:
-          key: deps10-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
-          paths:
-            - ".venv"
-            - "/usr/local/bin"
-            - "/usr/local/lib/python3.8/site-packages"
-      - run:
-          command: |
-            pipenv run python manage.py test
-
-  # build-and-push:
-  #   environment:
-  #     DOCKER_IMAGE: trinhchung/cicd
-  #     DOCKER_TAG: 0.0.1
-  #   executor: docker/docker
-  #   steps:
-  #     - setup_remote_docker
-  #     - checkout
-  #     - docker/check:
-  #         docker-username: DOCKER_USER
-  #         docker-password: DOCKER_PASSWORD
-  #     - docker/build:
-  #         image: $DOCKER_IMAGE
-  #         tag: $DOCKER_TAG
-  #     - docker/push:
-  #         digest-path: /tmp/digest.txt
-  #         image: $DOCKER_IMAGE
-  #         tag: $DOCKER_TAG
-
-  #     - run:
-  #         command: |
-  #           echo "Digest is: $(</tmp/digest.txt)"
+            echo "Digest is: $(</tmp/digest.txt)"
 workflows:
   build-deploy:
     jobs:
