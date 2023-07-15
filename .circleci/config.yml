@@ -7,7 +7,7 @@ jobs:
     docker:
       - image: cimg/python:3.10.1
         name: python
-      - image: chungtrinh/my-mysql:1.0.0
+      - image: chungtrinh/my-mysql
         auth:
           username: $DOCKER_USER
           password: $DOCKER_PASSWORD
