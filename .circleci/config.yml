@@ -22,10 +22,9 @@ jobs:
       - run: |
           docker ps
           docker network ls
-      - run: |
-          sudo apt-get update
-          sudo apt-get install iputils-ping
-          ping strange_elion
+      - run:
+          name: install dependencies
+          command: pip install -r requirements.txt
       - run:
           name: Waiting for MySQL to be ready
           command: |
@@ -36,9 +35,6 @@ jobs:
               sleep 1
             done
             echo Failed waiting for MySQL && exit 1
-      - run:
-          name: install dependencies
-          command: pip install -r requirements.txt
       - run:
           name: run tests
           command: python manage.py test --noinput --keepdb
