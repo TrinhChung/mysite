@@ -126,7 +126,7 @@ DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.mysql",
         "NAME": "mysite",
-        "USER": "siteuser",
+        "USER": "root",
         "PASSWORD": "chungtrinh1904",
         "HOST": HOST_MYSQL,
         "PORT": "3306",
