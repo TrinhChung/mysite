@@ -45,6 +45,7 @@ jobs:
             sudo pkill mysqld
             sudo apt-get update 
             sudo apt-get install mysql-client
+            systemctl status mysql.service
             service mysql start
             mysql -u root -p"chungtrinh1904"
             # python manage.py test 
