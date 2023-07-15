@@ -26,10 +26,13 @@ jobs:
       - run:
           name: wait container mysql
           command: |
-            while !nc -vz localhost 3306
+            echo "Waiting for MYSQL"
+            while ! nc -vz localhost 3306
               sleep 1
+              echo "."
             done 
-              echo "connect success"
+
+            echo "connect success"
       - run:
           name: install dependencies
           command: pip install -r requirements.txt
