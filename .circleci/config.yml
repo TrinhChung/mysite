@@ -22,7 +22,6 @@ jobs:
           docker_layer_caching: true
       - run: |
           docker ps
-          docker exec -it mysql bash
 
       # - run:
       #     name: install dependencies
