@@ -39,9 +39,7 @@ jobs:
       - run:
           name: run tests
           command: |
-            mysql -u root -p"chungtrinh1904"
-            # python manage.py test 
-            cat mysite.log
+            python manage.py test
 
   build-and-push:
     environment:
