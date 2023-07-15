@@ -9,7 +9,7 @@ jobs:
         name: python
       - image: cimg/mysql:8.0
         name: mysql
-        command: -p 3306:3306 --default-authentication-plugin=mysql_native_password
+        command: --default-authentication-plugin=mysql_native_password
         environment:
           MYSQL_DATABASE: mysite
           MYSQL_USER: siteuser
@@ -27,12 +27,12 @@ jobs:
               sleep 1
             done
             echo Failed waiting for MySQL && exit 1
-      # - run:
-      #     name: install dependencies
-      #     command: pip install -r requirements.txt
-      # - run:
-      #     name: run tests
-      #     command: python manage.py test --noinput --keepdb
+      - run:
+          name: install dependencies
+          command: pip install -r requirements.txt
+      - run:
+          name: run tests
+          command: python manage.py test --noinput --keepdb
 
   build-and-push:
     environment:
