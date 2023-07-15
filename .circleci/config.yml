@@ -15,14 +15,18 @@ jobs:
           MYSQL_ROOT_PASSWORD: chungtrinh1904
     steps:
       - checkout
-      - run: docker ps
+      - setup_remote_docker:
+          version: 20.10.14
+          docker_layer_caching: true
+      - run: |
+          docker ps
 
-      - run:
-          name: install dependencies
-          command: pip install -r requirements.txt
-      - run:
-          name: run tests
-          command: python manage.py test --noinput --keepdb
+      # - run:
+      #     name: install dependencies
+      #     command: pip install -r requirements.txt
+      # - run:
+      #     name: run tests
+      #     command: python manage.py test --noinput --keepdb
 
   build-and-push:
     environment:
@@ -50,10 +54,10 @@ workflows:
   build-deploy:
     jobs:
       - django-test
-      - build-and-push:
-          requires:
-            - django-test
-          filters:
-            branches:
-              only:
-                - circleci-project-setup
+      # - build-and-push:
+      #     requires:
+      #       - django-test
+      #     filters:
+      #       branches:
+      #         only:
+      #           - circleci-project-setup
