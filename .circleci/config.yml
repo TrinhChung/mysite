@@ -28,10 +28,10 @@ jobs:
           command: |
             echo "Waiting for MYSQL"
             while ! nc -vz localhost 3306
+            do
               sleep 1
               echo "."
             done 
-
             echo "connect success"
       - run:
           name: install dependencies
