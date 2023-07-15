@@ -17,12 +17,10 @@ jobs:
           MYSQL_ROOT_PASSWORD: chungtrinh1904
     steps:
       - checkout
-      - setup_remote_docker:
-          version: 20.10.14
-          docker_layer_caching: true
       - run: |
           docker ps
-          docker exec -it kind_banzai bash
+      - run: |
+
       # - run:
       #     name: install dependencies
       #     command: pip install -r requirements.txt
