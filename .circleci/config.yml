@@ -1,68 +1,56 @@
-version: 2.1
-orbs:
-  python: circleci/python@1.5.0
-  docker: circleci/docker@2.2.0
+version: 2
 jobs:
-  django-test:
+  build:
     docker:
-      - image: cimg/python:3.10.1
-        name: python
-      - image: chungtrinh/my-mysql
-        auth:
-          username: $DOCKER_USER
-          password: $DOCKER_PASSWORD
-
+      - image: circleci/python:3.8.0
+      - image: circleci/mysql:8.0.4
+        environment:
+          MYSQL_ROOT_PASSWORD: chungtrinh1904
+          MYSQL_DATABASE: mysite
+          MYSQL_USER: siteuser
+          MYSQL_PASSWORD: chungtrinh1904
     steps:
       - checkout
-      - setup_remote_docker:
-          docker_layer_caching: true
-      - run: |
-          docker ps
-          ls
-          cd ..
-          ls 
-          cd ..
-          ls
+      - run: sudo chown -R circleci:circleci /usr/local/bin
+      - run: sudo chown -R circleci:circleci /usr/local/lib/python3.8/site-packages
+      - restore_cache:
+          key: deps10-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
       - run:
-          name: wait container mysql
           command: |
-            echo "Waiting for MYSQL"
-            while ! nc -vz localhost 3306
-            do
-              sleep 1
-              echo "."
-            done 
-            echo "connect success"
+            sudo pip install pipenv
+            pipenv install
+      - save_cache:
+          key: deps10-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
+          paths:
+            - ".venv"
+            - "/usr/local/bin"
+            - "/usr/local/lib/python3.8/site-packages"
       - run:
-          name: install dependencies
-          command: pip install -r requirements.txt
-      - run:
-          name: run tests
           command: |
-            python manage.py test
+            pipenv run python manage.py test
 
-  build-and-push:
-    environment:
-      DOCKER_IMAGE: trinhchung/cicd
-      DOCKER_TAG: 0.0.1
-    executor: docker/docker
-    steps:
-      - setup_remote_docker
-      - checkout
-      - docker/check:
-          docker-username: DOCKER_USER
-          docker-password: DOCKER_PASSWORD
-      - docker/build:
-          image: $DOCKER_IMAGE
-          tag: $DOCKER_TAG
-      - docker/push:
-          digest-path: /tmp/digest.txt
-          image: $DOCKER_IMAGE
-          tag: $DOCKER_TAG
+  # build-and-push:
+  #   environment:
+  #     DOCKER_IMAGE: trinhchung/cicd
+  #     DOCKER_TAG: 0.0.1
+  #   executor: docker/docker
+  #   steps:
+  #     - setup_remote_docker
+  #     - checkout
+  #     - docker/check:
+  #         docker-username: DOCKER_USER
+  #         docker-password: DOCKER_PASSWORD
+  #     - docker/build:
+  #         image: $DOCKER_IMAGE
+  #         tag: $DOCKER_TAG
+  #     - docker/push:
+  #         digest-path: /tmp/digest.txt
+  #         image: $DOCKER_IMAGE
+  #         tag: $DOCKER_TAG
 
-      - run:
-          command: |
-            echo "Digest is: $(</tmp/digest.txt)"
+  #     - run:
+  #         command: |
+  #           echo "Digest is: $(</tmp/digest.txt)"
 workflows:
   build-deploy:
     jobs:
