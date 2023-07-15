@@ -16,13 +16,6 @@ jobs:
     steps:
       - checkout
       - run:
-          name: reset pass word
-          command: |
-            sudo apt-get update
-            sudo apt-get install -f mysql-server
-            sudo mysql -h localhost -u root
-            ALTER USER 'root'@'localhost' IDENTIFIED BY 'chungtrinh1904'
-      - run:
           name: install dependencies
           command: pip install -r requirements.txt
       - run:
