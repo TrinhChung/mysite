@@ -6,4 +6,4 @@
 db/
 staticfiles/
 /.coverage
-/mysite.log
+mysite.log
