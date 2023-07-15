@@ -9,7 +9,7 @@ jobs:
         name: python
       - image: cimg/mysql:8.0
         name: mysql
-        command: -p 3306:3306 --default-authentication-plugin=mysql_native_password
+        command: -e MYSQL_ROOT_PASSWORD=chungtrinh1904 -p 3306:3306 --default-authentication-plugin=mysql_native_password
         environment:
           MYSQL_DATABASE: mysite
           MYSQL_USER: siteuser
