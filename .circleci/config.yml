@@ -24,7 +24,7 @@ jobs:
           docker network ls
       - run: |
           sudo apt-get update
-          sudo apt-get install iputils
+          sudo apt-get install iputils-ping
           ping strange_elion
       - run:
           name: Waiting for MySQL to be ready
