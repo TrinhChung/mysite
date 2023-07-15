@@ -6,7 +6,9 @@ jobs:
   django-test:
     docker:
       - image: cimg/python:3.10.1
+        name: python
       - image: cimg/mysql:8.0
+        name: mysql
         command: --default-authentication-plugin=mysql_native_password
         environment:
           MYSQL_DATABASE: mysite
@@ -20,6 +22,7 @@ jobs:
           docker_layer_caching: true
       - run: |
           docker ps
+          docker exec -it mysql bash
 
       # - run:
       #     name: install dependencies
