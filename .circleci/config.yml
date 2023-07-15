@@ -41,7 +41,12 @@ jobs:
           command: |
             sudo apt-get update 
             sudo apt-get install mysql-client
-            mysql -u root -pchungtrinh1904
+            ps -A|grep mysql
+            sudo pkill mysql
+            ps -A|grep mysqld
+            sudo pkill mysqld
+            service mysql restart
+            mysql -u root -p"chungtrinh1904"
             # python manage.py test 
             cat mysite.log
 
