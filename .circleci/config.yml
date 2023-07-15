@@ -15,6 +15,8 @@ jobs:
           MYSQL_ROOT_PASSWORD: chungtrinh1904
     steps:
       - checkout
+      - run:
+          command: /etc/init.d/mysql status
 
       - run:
           name: install dependencies
