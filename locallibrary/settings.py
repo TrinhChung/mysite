@@ -18,7 +18,7 @@ import logging
 BASE_DIR = Path(__file__).resolve().parent.parent
 IS_PRODUCT = int(os.environ.get("PRODUCT", 0)) == 1
 HOST_MYSQL = "mysql" if IS_PRODUCT else "localhost"
-
+print("is product: ", IS_PRODUCT)
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
