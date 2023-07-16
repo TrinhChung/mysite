@@ -21,8 +21,6 @@ jobs:
             apt-cache policy docker-ce
             sudo apt install docker-ce docker-compose-plugin
             sudo usermod -aG docker ${USER}
-            groups
-            sudo usermod -aG docker username
       - run:
           name: Start container and verify it's working
           command: docker-compose up --build
