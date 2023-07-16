@@ -28,7 +28,7 @@ jobs:
           docker ps
           docker network ls
       - run: |
-          docker exec -it my-django "python manage.py test"
+          docker exec -it django "python manage.py test"
 
       # - run:/
       #     name: wait container mysql
