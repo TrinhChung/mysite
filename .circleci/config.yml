@@ -79,9 +79,9 @@ workflows:
   build-deploy:
     jobs:
       - django-test
-      # - build-and-push:
-      #     requires:
-      #       - django-test
+      - build-and-push:
+          requires:
+            - django-test
       #     filters:
       #       branches:
       #         only:
