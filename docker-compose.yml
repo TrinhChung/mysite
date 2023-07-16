@@ -24,6 +24,14 @@ services:
     build: .
     # command: sh -c "python manage.py makemigrations &&
     #   python manage.py migrate && python manage.py loaddata seeder.json && python manage.py collectstatic --no-input --clear && gunicorn locallibrary.wsgi runserver --bind 0.0.0.0:8000"
+    command: |
+      echo "Waiting for MYSQL"
+      while ! nc -vz localhost 3306
+      do
+        sleep 1
+        echo "."
+      done
+      echo "connect success"
     expose:
       - 8000
     restart: always
