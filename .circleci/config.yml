@@ -56,28 +56,6 @@ jobs:
           name: docker-compose down
           command: docker-compose down
 
-  build-and-push:
-    environment:
-      DOCKER_IMAGE: trinhchung/cicd
-      DOCKER_TAG: 0.0.1
-    executor: docker/docker
-    steps:
-      - setup_remote_docker
-      - checkout
-      - docker/check:
-          docker-username: DOCKER_USER
-          docker-password: DOCKER_PASSWORD
-      - docker/build:
-          image: $DOCKER_IMAGE
-          tag: $DOCKER_TAG
-      - docker/push:
-          digest-path: /tmp/digest.txt
-          image: $DOCKER_IMAGE
-          tag: $DOCKER_TAG
-
-      - run:
-          command: |
-            echo "Digest is: $(</tmp/digest.txt)"
 workflows:
   build-deploy:
     jobs:
