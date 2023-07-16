@@ -32,7 +32,8 @@ services:
       - .:/app
       - static_volume:/app/staticfiles
     depends_on:
-      - my-mysql
+      my-mysql:
+        condition: service_healthy
 
   my-nginx:
     container_name: nginx
