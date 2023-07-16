@@ -24,7 +24,7 @@ jobs:
       - run:
           name: Start container and verify it's working
           command: |
-            docker-compose up --build -d
+            docker-compose up -d
       - run: |
           docker ps
           docker network ls
@@ -41,14 +41,9 @@ jobs:
       - run: |
           docker logs django
           docker-compose run my-django ./manage.py test
-
-      #
-      # - run:
-      #     name: install dependencies
-      #     command: pip install -r requirements.txt
-      # - run:
-      #     name: run tests
-      #     command: python manage.py test --noinput --keepdb
+      - run: |
+          docker logs django
+          docker-compose run my-django ./manage.py test
 
   build-and-push:
     environment:
