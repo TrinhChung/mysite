@@ -53,12 +53,17 @@ jobs:
           name: "create static file"
           command: |
             docker-compose run my-django ./manage.py test
+      - run:
+          name: docker-compose down
+          command: docker-compose down
   build-and-push:
     machine:
       image: ubuntu-2004:current
     steps:
-      - checkout
-      - run: docker ps
+      - add_ssh_keys:
+          fingerprints:
+            - "0c:68:b0:44:51:e9:3d:52:e9:c0:a2:e2:45:53:27:86"
+      - run: ssh -oStrictHostKeyChecking=no -v $USER_NAME@$HOST_NAME "./deploy.sh"
   # django-deploy:
   #   machine:
   #     image: ubuntu-2004:current
