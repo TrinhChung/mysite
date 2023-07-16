@@ -39,16 +39,16 @@ jobs:
               echo "."
             done
             echo "connect success"
-      # - run:
-      #     name: "migrate and seed"
-      #     command: |
-      #       docker-compose run my-django ./manage.py makemigrations
-      #       docker-compose run my-django ./manage.py migrate
-      #       docker-compose run my-django ./manage.py loaddata seeder.json
-      # - run:
-      #     name: "create static file"
-      #     command: |
-      #       docker-compose run my-django ./manage.py collectstatic --no-input --clear
+      - run:
+          name: "migrate and seed"
+          command: |
+            docker-compose run my-django ./manage.py makemigrations
+            docker-compose run my-django ./manage.py migrate
+            docker-compose run my-django ./manage.py loaddata seeder.json
+      - run:
+          name: "create static file"
+          command: |
+            docker-compose run my-django ./manage.py collectstatic --no-input --clear
       - run:
           name: "Run test"
           command: |
