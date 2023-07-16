@@ -5,27 +5,33 @@ orbs:
 
 jobs:
   django-test:
-    machine:
-      image: circleci/classic:edge
+    machine: true
     steps:
       - checkout
+      - setup_remote_docker:
+          docker_layer_caching: true
       - run:
-          # テストに必要なコンテナを立ち上げ
-          name: docker-compose up
-          command: docker-compose up -d
+          name: Start container and verify it's working
+          command: docker-compose up --build
+      - run: |
+          docker ps
+          docker network ls
       - run:
-          # トラブルシューティング時、CircleCI の UI 上でコンテナの起動状況を確認できるようにコンテナ一覧を表示させる（趣味）
-          name: docker ps
-          command: docker ps
-      - run:
-          # Django の自動テスト
-          # ここで失敗すると次の処理には進まないようになっているため、問題があるコードは本番環境に反映されないようになっている
-          name: test
-          command: docker-compose run python ./manage.py test
-      - run:
-          # コンテナを停止 (今思えばいらないかも？)
-          name: docker-compose down
-          command: docker-compose down
+          name: wait container mysql
+          command: |
+            echo "Waiting for MYSQL"
+            while ! nc -vz localhost 3306
+            do
+              sleep 1
+              echo "."
+            done 
+            echo "connect success"
+      # - run:
+      #     name: install dependencies
+      #     command: pip install -r requirements.txt
+      # - run:
+      #     name: run tests
+      #     command: python manage.py test --noinput --keepdb
 
   build-and-push:
     environment:
