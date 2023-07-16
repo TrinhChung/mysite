@@ -53,9 +53,6 @@ jobs:
           name: "create static file"
           command: |
             docker-compose run my-django ./manage.py test
-      - run:
-          name: docker-compose down
-          command: docker-compose down
   build-and-push:
     machine:
       image: ubuntu-2004:current
