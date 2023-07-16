@@ -19,6 +19,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 IS_PRODUCT = int(os.environ.get("PRODUCT", 0)) == 1
 HOST_MYSQL = "mysql" if IS_PRODUCT else "localhost"
 print("is product: ", IS_PRODUCT)
+print("is product: ", HOST_MYSQL)
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
@@ -63,10 +65,10 @@ LOGGING = {
 
 ALLOWED_HOSTS = ["*"]
 
-SECURE_SSL_REDIRECT = False
-SESSION_COOKIE_SECURE = False
-CSRF_COOKIE_SECURE = False
-SECURE_HSTS_SECONDS = 0
+SECURE_SSL_REDIRECT = IS_PRODUCT
+SESSION_COOKIE_SECURE = IS_PRODUCT
+CSRF_COOKIE_SECURE = IS_PRODUCT
+SECURE_HSTS_SECONDS = IS_PRODUCT * 7200
 # Application definition
 
 INSTALLED_APPS = [
