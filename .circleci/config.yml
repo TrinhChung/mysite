@@ -7,6 +7,7 @@ jobs:
   django-test:
     machine:
       image: ubuntu-2004:current
+      docker_layer_caching: true
     steps:
       - checkout
       - run:
@@ -56,19 +57,11 @@ jobs:
           name: docker-compose down
           command: docker-compose down
   build-and-push:
-    executor: docker/docker
+    machine:
+      image: ubuntu-2004:current
     steps:
-      - setup_remote_docker
       - checkout
-      - docker/check
-      - docker/build:
-          image: my_repo/orb-test
-      - docker/push:
-          digest-path: /tmp/digest.txt
-          image: my_repo/orb-test
-      - run:
-          command: |
-            echo "Digest is: $(</tmp/digest.txt)"
+      - run: docker ps
   # django-deploy:
   #   machine:
   #     image: ubuntu-2004:current
