@@ -40,7 +40,7 @@ jobs:
             echo "connect success"
       - run: |
           docker logs django
-          docker-compose run django ./manage.py test
+          docker-compose run my-django ./manage.py test
 
       #
       # - run:
