@@ -26,8 +26,8 @@ services:
     container_name: django
     image: django-docker:0.0.1
     build: .
-    # command: sh -c "python manage.py makemigrations &&
-    #   python manage.py migrate && python manage.py loaddata seeder.json && python manage.py collectstatic --no-input --clear && gunicorn locallibrary.wsgi runserver --bind 0.0.0.0:8000"
+    command: sh -c "python manage.py makemigrations &&
+      python manage.py migrate && python manage.py loaddata seeder.json && python manage.py collectstatic --no-input --clear && gunicorn locallibrary.wsgi runserver --bind 0.0.0.0:8000"
     expose:
       - 8000
     # restart: always
