@@ -27,16 +27,19 @@ jobs:
       - run: |
           docker ps
           docker network ls
-      - run:
-          name: wait container mysql
-          command: |
-            echo "Waiting for MYSQL"
-            while ! nc -vz localhost 3306
-            do
-              sleep 1
-              echo "."
-            done 
-            echo "connect success"
+      - run: |
+          docker exec -it my-django "python manage.py test"
+
+      # - run:
+      #     name: wait container mysql
+      #     command: |
+      #       echo "Waiting for MYSQL"
+      #       while ! nc -vz localhost 3306
+      #       do
+      #         sleep 1
+      #         echo "."
+      #       done
+      #       echo "connect success"
       # - run:
       #     name: install dependencies
       #     command: pip install -r requirements.txt
