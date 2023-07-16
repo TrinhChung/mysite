@@ -23,16 +23,24 @@ jobs:
             sudo usermod -aG docker ${USER}
       - run:
           name: Start container and verify it's working
-          command: docker-compose up --build -d
+          command: |
+            docker-compose up --build -d
       - run: |
           docker ps
           docker network ls
+      - run:
+          name: wait container mysql
+          command: |
+            echo "Waiting for MYSQL"
+            while ! nc -vz localhost 3306
+            do
+              sleep 1
+              echo "."
+            done
+            echo "connect success"
       - run: |
           docker exec -it django "python manage.py test"
 
-      # - run:/
-      #     name: wait container mysql
-      #     command: |
       #
       # - run:
       #     name: install dependencies
