@@ -39,6 +39,7 @@ jobs:
             done
             echo "connect success"
       - run: |
+          docker logs django
           docker exec -it django "python manage.py test"
 
       #
