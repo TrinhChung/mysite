@@ -55,6 +55,32 @@ jobs:
       - run:
           name: docker-compose down
           command: docker-compose down
+  build-and-push:
+    executor: docker/docker
+    steps:
+      - setup_remote_docker
+      - checkout
+      - docker/check
+      - docker/build:
+          image: my_repo/orb-test
+      - docker/push:
+          digest-path: /tmp/digest.txt
+          image: my_repo/orb-test
+      - run:
+          command: |
+            echo "Digest is: $(</tmp/digest.txt)"
+  # django-deploy:
+  #   machine:
+  #     image: ubuntu-2004:current
+  #   steps:
+  #     - checkout
+  #     - add_ssh_keys:
+  #         fingerprints:
+  #           - "e1:3a:af:10:f6:b9:b2:6a:27:57:a0:00:95:ff:5a:c8"
+  #     - run:
+  #         name: deploy to vps
+  #         command: |
+  #           ssh ${USER_NAME}@${HOST_NAME} -p ${SSH_PORT} 'cd mysite && git pull origin main && docker-compose restart && docker-compose run python ./manage.py migrate'
 
 workflows:
   build-deploy:
