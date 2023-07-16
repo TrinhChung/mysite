@@ -81,7 +81,11 @@ jobs:
 workflows:
   build-deploy:
     jobs:
-      - django-test
+      - django-test:
+          filters:
+            branches:
+              only:
+                - circleci-project-setup
       # - build-and-push:
       #     requires:
       #       - django-test
