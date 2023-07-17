@@ -32,7 +32,7 @@ services:
       export PRODUCT=1 && cd catalog && django-admin compilemessages && cd .. && gunicorn locallibrary.wsgi runserver --bind 0.0.0.0:8000"
     expose:
       - 8000
-    restart: always
+    # restart: always
     volumes:
       - /tmp/app/mysqld:/var/run/mysqld
       - .:/app
