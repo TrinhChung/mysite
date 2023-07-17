@@ -18,8 +18,7 @@ import logging
 BASE_DIR = Path(__file__).resolve().parent.parent
 IS_PRODUCT = int(os.environ.get("PRODUCT", 0)) == 1
 HOST_MYSQL = "mysql" if IS_PRODUCT else "localhost"
-print("is product: ", IS_PRODUCT)
-print("is product: ", HOST_MYSQL)
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
@@ -31,7 +30,6 @@ SECRET_KEY = os.environ.get(
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = not IS_PRODUCT
-
 LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
@@ -63,7 +61,7 @@ LOGGING = {
     },
 }
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["localhost", "mysite.recurup.com", "127.0.0.1"]
 
 SECURE_SSL_REDIRECT = IS_PRODUCT
 SESSION_COOKIE_SECURE = IS_PRODUCT
@@ -199,3 +197,4 @@ INTERNAL_IPS = [
 
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+CSRF_TRUSTED_ORIGINS = ["https://mysite.recurup.com"]
