@@ -61,7 +61,7 @@ LOGGING = {
     },
 }
 
-ALLOWED_HOSTS = ["localhost", "mysite.recurup.com", "127.0.0.1"]
+ALLOWED_HOSTS = ["*"]
 
 SECURE_SSL_REDIRECT = IS_PRODUCT
 SESSION_COOKIE_SECURE = IS_PRODUCT
