@@ -197,4 +197,4 @@ INTERNAL_IPS = [
 
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
-CSRF_TRUSTED_ORIGINS = ["https://mysite.recurup.com"]
+# CSRF_TRUSTED_ORIGINS = ["https://mysite.recurup.com"]
