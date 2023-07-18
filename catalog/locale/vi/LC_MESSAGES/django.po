@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-12 17:19+0700\n"
+"POT-Creation-Date: 2023-07-19 00:56+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -30,7 +30,7 @@ msgstr "Ngày không hợp lệ - gia hạn trước hơn 4 tuần"
 msgid "Renewal date"
 msgstr "Ngày gia hạn"
 
-#: forms.py:30
+#: forms.py:29
 msgid "Enter a date between now and 4 weeks (default 3)."
 msgstr "Nhập ngày từ bây giờ đến 4 tuần (mặc định là 3)."
 
@@ -48,48 +48,6 @@ msgstr "Bạn có chắc chắn muốn xóa tác giả:"
 msgid "Yes, delete."
 msgstr "Vâng, xóa."
 
-#: templates/base_generic.html:46
-msgid "Staff"
-msgstr "Nhân viên"
-
-#: templates/base_generic.html:48
-msgid "Manage Book Instance"
-msgstr "Quản lý sách"
-
-#: templates/base_generic.html:53
-msgid "Name"
-msgstr "Tên"
-
-#: templates/base_generic.html:55
-msgid "My Borrowed"
-msgstr "Đã mượn"
-
-#: templates/base_generic.html:58
-msgid "Logout"
-msgstr "Đăng xuất"
-
-#: templates/base_generic.html:62
-msgid "Login"
-msgstr "Đăng nhập"
-
-#: forms.py:29
-msgid "Enter a date between now and 4 weeks (default 3)."
-msgstr ""
-
-#: templates/catalog/author_confirm_delete.html:4
-#, fuzzy
-#| msgid "All authors"
-msgid "Delete Author"
-msgstr "Tác giả:"
-
-#: templates/catalog/author_confirm_delete.html:5
-msgid "Are you sure you want to delete the author:"
-msgstr ""
-
-#: templates/catalog/author_confirm_delete.html:8
-msgid "Yes, delete."
-msgstr ""
-
 #: templates/catalog/author_detail.html:4 templates/catalog/book_detail.html:6
 #, fuzzy
 #| msgid "All authors"
@@ -105,7 +63,9 @@ msgid "Update"
 msgstr "Cập nhật"
 
 #: templates/catalog/author_detail.html:21
-msgid "Deletesss"
+#, fuzzy
+#| msgid "Deletesss"
+msgid "Delete"
 msgstr "Xóa"
 
 #: templates/catalog/author_form.html:9
@@ -113,13 +73,13 @@ msgstr "Xóa"
 msgid "Submit"
 msgstr "Gửi"
 
-#: templates/catalog/author_list.html:4
+#: templates/catalog/author_list.html:6
 #, fuzzy
 #| msgid "All authors"
 msgid "Author List"
 msgstr "Danh sách tác giả"
 
-#: templates/catalog/author_list.html:15
+#: templates/catalog/author_list.html:17
 msgid "There are no authors in the library."
 msgstr "Không có tác giả trong thư viện."
 
@@ -157,13 +117,13 @@ msgstr "Trả lại: "
 msgid "Imprint:"
 msgstr "Dấu ấn: "
 
-#: templates/catalog/book_list.html:4
+#: templates/catalog/book_list.html:6
 #, fuzzy
 #| msgid "Books:"
 msgid "Book List"
 msgstr "Sách:"
 
-#: templates/catalog/book_list.html:15
+#: templates/catalog/book_list.html:17
 msgid "There are no books in the library."
 msgstr "Quyển sách này không có trong thư viện"
 
@@ -196,39 +156,39 @@ msgstr "Quyển sách này không có trong thư viện"
 msgid "Borrowed books"
 msgstr "Sách đã mượn"
 
-#: templates/index.html:4 templates/index.html:7
+#: templates/index.html:6 templates/index.html:9
 msgid "Home Library"
 msgstr "Thư viện"
 
-#: templates/index.html:9
+#: templates/index.html:11
 msgid "Welcome to LocalLibrary, a website developed by"
 msgstr "Chào mừng tới thư viện, đây là goodread"
 
-#: templates/index.html:10
+#: templates/index.html:12
 msgid "Mozilla Developer Network"
 msgstr "Mozilla Developer Network"
 
-#: templates/index.html:12
+#: templates/index.html:14
 msgid "Dynamic content"
 msgstr "Nội dung"
 
-#: templates/index.html:13
+#: templates/index.html:15
 msgid "The library has the following record counts:"
 msgstr "Thư viện có số lượng bản ghi sau:"
 
-#: templates/index.html:16
+#: templates/index.html:18
 msgid "Books:"
 msgstr "Sách:"
 
-#: templates/index.html:20
+#: templates/index.html:22
 msgid "Copies:"
 msgstr "Bản sao:"
 
-#: templates/index.html:23
+#: templates/index.html:25
 msgid "Copies available:"
 msgstr "Bản sao có sẵn:"
 
-#: templates/index.html:27
+#: templates/index.html:29
 #, fuzzy
 #| msgid "All authors"
 msgid "Authors:"
@@ -250,108 +210,54 @@ msgstr "Sách:"
 msgid "Author"
 msgstr "Tác giả:"
 
-#: templates/navbar.html:21
+#: templates/navbar.html:22
 msgid "Manage"
 msgstr "Quản lý"
 
-#: templates/navbar.html:25
+#: templates/navbar.html:26
 msgid "Manage Book Instance"
 msgstr "Quản lý sách"
 
-#: templates/navbar.html:30
+#: templates/navbar.html:31
 msgid "Create Author"
 msgstr "Tạo tác giả"
 
-#: templates/navbar.html:40
+#: templates/navbar.html:39
 msgid "Name"
 msgstr "Tên"
 
-#: templates/navbar.html:43
+#: templates/navbar.html:42
+#, fuzzy
+#| msgid "My Borrowed"
 msgid "My Borrowed"
 msgstr "Đã mượn"
 
-#: templates/navbar.html:46
-msgid "Logout"
-msgstr "Đăng xuất"
-
-#: templates/navbar.html:52
-msgid "Login"
-msgstr "Đăng nhập"
-
-#: templates/pagination.html:8
-msgid "previous"
-msgstr "Quay lại"
-
-#: templates/navbar.html:15
-#, fuzzy
-#| msgid "Books:"
-msgid "Book"
-msgstr "Sách:"
-
-#: templates/navbar.html:18
-#, fuzzy
-#| msgid "All authors"
-msgid "Author"
-msgstr "Tác giả:"
-
-#: templates/navbar.html:21
-msgid "Manage"
-msgstr "Quản lý"
-
-#: templates/navbar.html:25
-msgid "Manage Book Instance"
-msgstr "Quản lý sách"
-
-#: templates/navbar.html:30
-msgid "Create Author"
-msgstr "Tạo tác giả"
-
-#: templates/navbar.html:40
-msgid "Name"
-msgstr "Tên"
-
-#: templates/navbar.html:43
-msgid "My Borrowed"
-msgstr "Đã mượn"
-
-#: templates/navbar.html:46
+#: templates/navbar.html:45
 msgid "Change password"
 msgstr ""
 
-#: templates/navbar.html:49
+#: templates/navbar.html:48
 msgid "Reset password"
 msgstr ""
 
-#: templates/navbar.html:52
+#: templates/navbar.html:51
 msgid "Logout"
 msgstr "Đăng xuất"
 
-#: templates/navbar.html:58
+#: templates/navbar.html:57
 msgid "Login"
 msgstr "Đăng nhập"
 
-#: views.py:63
+#: views.py:60
 msgid "Book does not exist"
 msgstr "Sách không tồn tại"
 
-#: views.py:99
+#: views.py:96
 msgid "Author does not exist"
 msgstr "Tác giả không tồn tại"
 
-#~ msgid "previous"
-#~ msgstr "Quay lại"
-
-#~ msgid "Page"
-#~ msgstr "Trang"
-
-#~ msgid "of"
-#~ msgstr "trên"
-
-#~ msgid "All books"
-#~ msgstr "Sách"
-
-#~ msgid "All authors"
-#~ msgstr "Tác giả"
-
 #~ msgid "Staff"
 #~ msgstr "Nhân viên"
+
+#~ msgid "previous"
+#~ msgstr "Quay lại"
