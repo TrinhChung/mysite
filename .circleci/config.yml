@@ -1,6 +1,5 @@
 version: 2.1
 orbs:
-  python: circleci/python@1.5.0
   docker: circleci/docker@2.2.0
 
 jobs:
@@ -57,13 +56,34 @@ jobs:
           name: docker-compose down
           command: docker-compose down
   build-and-push:
-    machine:
-      image: ubuntu-2004:current
+    executor: docker/docker
+    environment:
+      DOCKER_IMAGE: chungtrinh/cicd
+      DOCKER_TAG: latest
     steps:
-      - add_ssh_keys:
-          fingerprints:
-            - "0c:68:b0:44:51:e9:3d:52:e9:c0:a2:e2:45:53:27:86"
-      - run: ssh -oStrictHostKeyChecking=no -v $USER_NAME@$HOST_NAME "./deploy.sh"
+      - setup_remote_docker
+      - checkout
+      - docker/check:
+          docker-username: DOCKER_USERNAME
+          docker-password: DOCKER_PASS
+      - docker/build:
+          image: DOCKER_IMAGE
+          tag: DOCKER_TAG
+      - docker/push:
+          digest-path: /tmp/digest.txt
+          image: DOCKER_IMAGE
+          tag: DOCKER_TAG
+      - run:
+          command: |
+            echo "Digest is: $(</tmp/digest.txt)"
+  # build-and-push:
+  #   machine:
+  #     image: ubuntu-2004:current
+  #   steps:
+  #     - add_ssh_keys:
+  #         fingerprints:
+  #           - "0c:68:b0:44:51:e9:3d:52:e9:c0:a2:e2:45:53:27:86"
+  #     - run: ssh -oStrictHostKeyChecking=no -v $USER_NAME@$HOST_NAME "./deploy.sh"
 
 workflows:
   build-deploy:
