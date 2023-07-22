@@ -28,11 +28,11 @@ services:
     environment:
       - "GF_SMTP_ENABLED=true"
       - "GF_SMTP_HOST=smtp.gmail.com:587"
-      - "GF_SMTP_USER=user1@gmail.com"
-      - "GF_SMTP_PASSWORD=mysamplePassword"
-      - "GF_SMTP_FROM_ADDRESS=user1@gmail.com"
-      - "GF_SERVER_DOMAIN=grafana.my.domain"
-      - "GF_SERVER_ROOT_URL=grafana.my.domain"
+      - "GF_SMTP_USER=chungtrinh2k2@gmail.com"
+      - "GF_SMTP_PASSWORD=ptfanznmenvpxfij"
+      - "GF_SMTP_FROM_ADDRESS=chungtrinh2k2@gmail.com"
+      #- "GF_SERVER_DOMAIN=grafana.recurup.com"
+      #- "GF_SERVER_ROOT_URL=mysite.recurup.com"
     restart: unless-stopped
   my-mysql:
     container_name: mysql
