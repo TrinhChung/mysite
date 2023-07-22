@@ -22,6 +22,11 @@ jobs:
             sudo apt install docker-ce docker-compose-plugin
             sudo usermod -aG docker ${USER}
       - run:
+          name: fake file cert
+          command: |
+            touch ./nginx/certificate.pem
+            touch ./nginx/private.pem
+      - run:
           name: Start container and verify it's working
           command: |
             docker-compose up -d
@@ -43,7 +48,6 @@ jobs:
           command: |
             docker-compose run my-django ./manage.py makemigrations
             docker-compose run my-django ./manage.py migrate
-            docker-compose run my-django ./manage.py loaddata seeder.json
       - run:
           name: "create static file"
           command: |
