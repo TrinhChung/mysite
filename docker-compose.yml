@@ -31,7 +31,7 @@ services:
       - GF_SMTP_USER=chungtrinh2k2@gmail.com
       - GF_SMTP_PASSWORD=ptfanznmenvpxfij
       - GF_SMTP_FROM_ADDRESS=chungtrinh2k2@gmail.com
-      #- "GF_SERVER_DOMAIN=grafana.recurup.com"
+      - GF_SERVER_DOMAIN=recurup.com
       - GF_SERVER_ROOT_URL=https://mysite.recurup.com/grafana/
       - GF_SERVER_SERVE_FROM_SUB_PATH=true
     restart: unless-stopped
