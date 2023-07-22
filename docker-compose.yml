@@ -1,6 +1,10 @@
 version: "3"
 volumes:
   static_volume:
+  prometheus-data:
+    driver: local
+  grafana-data:
+    driver: local
 services:
   prometheus:
     image: prom/prometheus:latest
